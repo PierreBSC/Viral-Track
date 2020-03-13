@@ -1,6 +1,6 @@
 # Viral-Track
 
-Viral-Track is a R-based computational software based on **STAR** and **samtools** developped to detect and identify viruses from single-cell RNA-sequencing (scRNA-seq) raw data. This tool was tested on various scRNA-seq datasets including mouse and human infected samples as described in our paper *'Detecting and studying viral infection at the single-cell resolution using Viral-Track'*.  Viral-Track was tested on a CentOS 7 cluster and on Ubuntu 18.0.4 workstation. 
+Viral-Track is a R-based computational software based on **STAR** and **samtools** developped to detect and identify viruses from single-cell RNA-sequencing (scRNA-seq) raw data. This tool was tested on various scRNA-seq datasets derived from mouse and human infected samples as described in our paper *'Detecting and studying viral infection at the single-cell resolution using Viral-Track'*.  Viral-Track was tested on a CentOS 7 cluster and on an Ubuntu 18.0.4 workstation. 
 
 
 Installation
@@ -15,7 +15,7 @@ Before running Viral-Track, several dependencies must be installed :
 if (!requireNamespace("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
 BiocManager::install(version = "3.10") 
-BiocManager::install(c("Biostrings", "ShortRead","doParallel","GenomicAlignments"))
+BiocManager::install(c("Biostrings", "ShortRead","doParallel","GenomicAlignments","Gviz","GenomicFeatures))
 ```
 
 
@@ -47,13 +47,18 @@ STAR --runThreadN N --runMode genomeGenerate --genomeDir /path/to/index --genome
 
 This can take some time and requires large amount of memory and storage space : please check that you have at least 32 GB of RAM and more than 100GB of avaible memory.
 
-Detection of virus in scRNA-seq data
+Lastly you need to create a small file that list all the viruses included in the index and their genome length. We provide an example in the Github that corresponds to the VirusSite dataset.
+
+
+Detection of viruses in scRNA-seq data
 ---------------
 
-We can now start the real analysis. Viral-Track relies on two different text files to run : a file containing the values of all parameters (arameter file) and one containing the path to the sequencing files to analyze (target file). An exemple of each file is provided in the Github. 
+We can now start the real analysis. Viral-Track relies on two different text files to run : a file containing the values of all parameters (parameter file) and one containing the path to the sequencing files to analyze (target file). An exemple of each file is provided in the Github. 
 
 
 The parameter file consists in a list of rows where the name of each variable is followed by an equal symbol and then the value of the parameter.
+
+The target file contains the list of the files paths. The files can be either .fastq or .fastq.gz files.
 
 Before running any scanning analysis check the parameter file and make sure that you have set the correct values for :
 
@@ -73,8 +78,9 @@ If you want to launch it in the background use instead :
 R CMD BATCH Viral_Track_scanning.R Path/to/Parameter_file.txt Path/to/Target_file.txt &
 ```
 
+Once the analysis is over, the results can be checked by looking at the output directory. A pdf called QC_report.pdf is automatically generated and described the most important results :
+The three first panels describe the general quality of the mapping (percentage of mapped reads, mean length of the mapped reads....). The next panels describe the quality of the mapping of each individual virus : three different scatter plots show the number of uniquely mapped reads, the complexity of the sequences, the percentage of genome mapped and the length of the longest mapped contig. By default only viruses with at least 50 uniquely mapped reads, a mean sequence complexity of 1.3 and 10% of the genome mapped is considered as being present in the sample.
+An example of QC file can be found in the Github.
 
-
-
-
-
+Transcriptome assembly
+---------------
