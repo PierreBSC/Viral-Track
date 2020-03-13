@@ -50,7 +50,8 @@ This can take some time and requires large amount of memory and storage space : 
 Detection of virus from scRNA-seq data
 ---------------
 
-This can take some time and requires large amount of memory and storage space : please check that you have at least 32 GB of RAM and more than 100GB of avaible memory.
+We can now start the real analysis. Viral-Track relies on two different text files to run : a file containing the values of all parameters and one containing the path to the sequencing files to analyze.
+
 
 
 
