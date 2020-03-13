@@ -22,12 +22,12 @@ BiocManager::install(c("Biostrings", "ShortRead","doParallel","GenomicAlignments
 2 . **S**pliced **T**ranscript **A**lignment to **A** **R**eference (**STAR**) has to be installed. The full installation process is described on the STAR [Github](https://github.com/alexdobin/STAR). On Ubuntu this can be done directly by typing :
 
 ```batch
-sudo apt install rna-star
+sudo apt-get install rna-star
 ```
 3 . **Samtools** suite is also required. The installation is described extensively [here](http://www.htslib.org/download/). On Ubuntu this is done by simply typing :
 
 ```batch
-sudo apt install samtools
+sudo apt-get install samtools
 ```
 
 4 . Lastly, the transcript assembler **StringTie** is needed. This installation process is described [here](https://ccb.jhu.edu/software/stringtie/). Don't forget to add StringTie to your shell's PATH directory.
