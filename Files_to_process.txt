@@ -1,0 +1,1 @@
+/home/pbost/Desktop/Viral_Track/Data_COVID/C147_S1_L001_R2_001.fastq.gz

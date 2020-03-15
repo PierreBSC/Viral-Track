@@ -1,0 +1,11 @@
+N_thread=14
+Output_directory="Desktop/Viral_Track/Test_COVID/"
+Index_genome="Desktop/Viral_Track/Index_human/"
+Viral_annotation_file="Desktop/Viral_Track/Virusite_annotation_file.txt"
+Name_run="VSV_spleen"
+Load_STAR_module=FALSE
+Load_samtools_module=FALSE
+Load_stringtie_module=FALSE
+Minimal_read_mapped=50
+Single_cell_metadata="/home/pbost/URIEL/Pipeline/Raw_data/wells_cells.txt"
+
