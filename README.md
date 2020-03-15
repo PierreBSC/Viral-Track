@@ -30,7 +30,7 @@ sudo apt-get install rna-star
 sudo apt-get install samtools
 ```
 
-4 .  the transcript assembler **StringTie** is needed. This installation process is described [here](https://ccb.jhu.edu/software/stringtie/). Don't forget to add StringTie to your shell's PATH directory.
+4 . The transcript assembler **StringTie** is needed. This installation process is described [here](https://ccb.jhu.edu/software/stringtie/). Don't forget to add StringTie to your shell's PATH directory.
 
 5 . For the single cell demultiplexing we will use **UMI-tools** and the R package **RSubread**. Installation of **UMI-tools** is described [here](https://github.com/CGATOxford/UMI-tools).
 
