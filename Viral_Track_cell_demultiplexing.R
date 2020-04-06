@@ -117,7 +117,7 @@ for (path_temp in List_target_path) {
  #Adding UMI_tools to the environment
  
 
- command_umi_tools = paste("umi_tools count --per-gene --gene-tag=XT --assigned-status-tag=XS --per-cell -I ",
+ command_umi_tools = paste("umi_tools count --per-gene --gene-tagw=XT --assigned-status-tag=XS --per-cell -I ",
                            List_target_path,"/Assigned_sorted.bam  -S ",List_target_path, "/Expression_table.tsv  --wide-format-cell-counts",sep="")
 
 

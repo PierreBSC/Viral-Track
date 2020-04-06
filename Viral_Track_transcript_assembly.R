@@ -115,7 +115,7 @@ cat("Performing StringTie transcriptome assembly...")
 for (k in Identified_viral_fragments) {
   temp_path = paste(Path_run_directory,k,"/",sep = "")
   
-  stringtie_command = paste("stringtie",paste(temp_path,k,"_merge.bam",sep = ""),"-f 0.01",
+  stringtie_command = paste("stringtie",paste(temp_path,k,"_merge.bam",sep = ""),"-f 0.01 -g 5",
                             "-o",paste(temp_path,k,"_annotation.gtf",sep = ""),"-l",k)
   system(stringtie_command)
   
