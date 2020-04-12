@@ -162,7 +162,6 @@ registerDoParallel(cl)
 
 #A)Loading
 
-Parameter_target_files = "/home/pbost/URIEL/Pipeline/Settings/Files_to_process.txt"
 Parameter_target_files = args[2]
 File_to_process = read.table(Parameter_target_files,header = F,sep = "\t")
 File_to_process = as.character(File_to_process$V1)
@@ -229,7 +228,9 @@ for (k in List_target_path) {
   #We construct a complex command 
   STAR_mapping_command = paste("STAR --runThreadN",N_thread,"--genomeDir",Index_genome,"--readFilesIn",k,"--outSAMattributes NH HI AS nM NM XS ",
                                "--outFileNamePrefix",name_prefix,"--outSAMtype BAM SortedByCoordinate","--twopassMode Basic ",
-                               "--outFilterMatchNmin 35 --outFilterScoreMinOverLread 0.6 --outFilterMatchNminOverLread 0.6")
+                             "--outFilterMatchNmin 35 --outFilterScoreMinOverLread 0.6 --outFilterMatchNminOverLread 0.6")
+
+
   
   #If the file is in the format .gz then we need to add an additional paramter :
   if (is_gz_file) {
@@ -297,6 +298,9 @@ for (k in List_output_path) {
     }
     
     temp_export_bam_command = paste("samtools view -b",temp_sorted_bam,i,">",paste(k,"Viral_BAM_files/",i,".bam ",sep = ""))
+    temp_export_bam_command = paste("samtools view -b ",temp_sorted_bam," \'",i,"\'"," > \'",k,"Viral_BAM_files/",i,".bam\'",sep = "")
+    
+    
     system(temp_export_bam_command)
     #cat(paste(rownames(temp_chromosome_count),"\n"))
   }
@@ -532,7 +536,7 @@ for (k in List_output_path) {
   names(list_BAM_files) = selected_virus
   
   list_BAM_files = list_BAM_files[rownames(Filtered_QC)]
-  
+  list_BAM_files = paste("\'",list_BAM_files,"\'",sep = "")
   
   Merging_BAM_commad = paste("samtools merge",paste(k,"Merged_viral_mapping.bam",sep = ""),list_BAM_files)
   system(Merging_BAM_commad)
