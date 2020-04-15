@@ -84,8 +84,8 @@ for (k in Identified_viral_fragments) {
     name_target = gsub("/","",name_target)
     
     #Creating a large samtools command 
-    samtools_extraction_command = paste("samtools view -b",paste(i,name_target,"_Aligned.sortedByCoord.out.bam",sep = "")
-                                        ,k,">",paste(temp_path,name_target,".bam",sep = ""))
+    samtools_extraction_command = paste("samtools view -b ",i,name_target,"_Aligned.sortedByCoord.out.bam "
+                                        ,"\'",k,"\'"," > \'",temp_path,name_target,".bam\'",sep = "")
     system(samtools_extraction_command)
     
   }
@@ -101,6 +101,13 @@ for (k in Identified_viral_fragments) {
   
   samtools_merging_command = paste("samtools merge",paste(temp_path,k,"_merge.bam",sep = ""),
                                    paste(temp_path,"*",sep = ""))
+  
+  l = list.files(temp_path,full.names = T)
+  l = paste("\'",l,"\'",sep="")
+  l = paste(l,collapse = " ")
+  
+  samtools_merging_command = paste("samtools merge \'",temp_path,k,"_merge.bam\' ",l,sep = "")
+  
   system(samtools_merging_command)
   
 }
@@ -114,9 +121,10 @@ cat("Performing StringTie transcriptome assembly...")
 ##Assembling transcriptome de novo
 for (k in Identified_viral_fragments) {
   temp_path = paste(Path_run_directory,k,"/",sep = "")
+
+  stringtie_command = paste("stringtie ","\'",temp_path,k,"_merge.bam\'"," -f 0.01 -g 5 ",
+                            "-o ","\'",temp_path,k,"_annotation.gtf\' "," -l \'",k,"\'",sep = "")
   
-  stringtie_command = paste("stringtie",paste(temp_path,k,"_merge.bam",sep = ""),"-f 0.01 -g 5",
-                            "-o",paste(temp_path,k,"_annotation.gtf",sep = ""),"-l",k)
   system(stringtie_command)
   
 }

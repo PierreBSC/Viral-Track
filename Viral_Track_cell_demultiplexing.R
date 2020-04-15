@@ -96,6 +96,7 @@ for (path_temp in List_target_path) {
   for (segment_temp in Identified_viral_fragments) {
     List_bam_files = c(List_bam_files, paste(path_temp,"/Viral_BAM_files/",segment_temp,".bam",sep = ""))
   }
+  List_bam_files = paste("\'",List_bam_files,"\'",sep = "")
   
   command_merge = base::paste("samtools merge ",List_target_path,"/Reads_to_demultiplex.bam -f ",paste(List_bam_files,collapse = " "),sep="")
   system(command_merge)
@@ -117,12 +118,13 @@ for (path_temp in List_target_path) {
  #Adding UMI_tools to the environment
  
 
- command_umi_tools = paste("umi_tools count --per-gene --gene-tagw=XT --assigned-status-tag=XS --per-cell -I ",
+ command_umi_tools = paste("umi_tools count --per-gene --gene-tag=XT --assigned-status-tag=XS --per-cell -I ",
                            List_target_path,"/Assigned_sorted.bam  -S ",List_target_path, "/Expression_table.tsv  --wide-format-cell-counts",sep="")
-
 
   suppressMessages(system(command_umi_tools))
   
   
 }
+
+
 
