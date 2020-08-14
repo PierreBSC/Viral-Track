@@ -8,7 +8,7 @@ Installation
 
 Before running Viral-Track, several dependencies must be installed :
 
-1 . The first step is to install [**R software**] (https://www.r-project.org/). Once this is done, several Bioconductor packages  have to be installed too. To do so start a R session and type :
+1 . The first step is to install [**R software**](https://www.r-project.org/). Once this is done, several Bioconductor packages  have to be installed too. To do so start a R session and type :
 
 
 ```r
